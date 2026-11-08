@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EcoMarket | Compra local, genera impacto</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Encabezado con logo, navegación y botón principal -->
+  <header class="site-header">
+    <a class="logo" href="#inicio">EcoMarket</a>
+    <nav aria-label="Navegación principal">
+      <ul class="nav-list">
+        <li><a href="#categorias">Categorías</a></li>
+        <li><a href="#catalogo">Productos</a></li>
+        <li><a href="#impacto">Impacto</a></li>
+        <li><a href="#productores">Productores</a></li>
+        <li><a href="#suscripcion">Suscríbete</a></li>
+      </ul>
+    </nav>
+    <button id="btn-carrito" class="btn btn-secundario" type="button">Carrito (<span id="contador">0</span>)</button>
+    <a class="btn btn-primary" href="#catalogo">Explorar productos</a>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section id="inicio" class="hero">
+      <div class="hero-texto">
+        <h1>El mercado de tu región, en un solo lugar</h1>
+        <p>Compra alimentos orgánicos y productos sostenibles directamente a productores colombianos.</p>
+        <a class="btn btn-accent" href="#catalogo">Explorar productos</a>
+      </div>
+      <img src="https://placehold.co/560x380/e4f1e8/1f5c3f?text=Productos+locales" alt="Canasta con frutas, verduras y productos artesanales de productores locales">
+    </section>
+
+    <!-- Categorías -->
+    <section id="categorias" class="seccion">
+      <h2>Categorías</h2>
+      <div class="grid grid-4">
+        <article class="tarjeta"><h3>Frutas y verduras</h3><p>Frescas, de temporada y cultivadas cerca de ti.</p><button class="btn btn-secundario ver-categoria" type="button" data-categoria="Frutas y verduras">Ver productos</button></article>
+        <article class="tarjeta"><h3>Despensa</h3><p>Café, miel, panela, granos y más.</p><button class="btn btn-secundario ver-categoria" type="button" data-categoria="Despensa">Ver productos</button></article>
+        <article class="tarjeta"><h3>Cuidado personal</h3><p>Jabones y cremas hechos con ingredientes naturales.</p><button class="btn btn-secundario ver-categoria" type="button" data-categoria="Cuidado personal">Ver productos</button></article>
+        <article class="tarjeta"><h3>Hogar sostenible</h3><p>Alternativas reutilizables para tu día a día.</p><button class="btn btn-secundario ver-categoria" type="button" data-categoria="Hogar sostenible">Ver productos</button></article>
+      </div>
+    </section>
+
+    <!-- Catálogo (se llena con tienda.js) -->
+    <section id="catalogo" class="seccion seccion-clara">
+      <h2>Productos</h2>
+      <div id="filtros-categoria" class="filtros-cat" role="group" aria-label="Filtrar por categoría"></div>
+      <p id="aviso" role="status" aria-live="polite" class="mensaje-ok"></p>
+      <p id="catalogo-vacio" class="tarjeta" hidden>No hay productos en esta categoría.</p>
+      <div id="lista-productos" class="grid grid-3"></div>
+    </section>
+
+    <!-- Impacto -->
+    <section id="impacto" class="seccion">
+      <h2>Compra local, genera impacto</h2>
+      <div class="grid grid-2">
+        <article class="tarjeta"><h3>Para ti</h3><ul><li>Alimentos frescos y de origen conocido</li><li>Productos sin empaques innecesarios</li><li>Precios justos y claros</li></ul></article>
+        <article class="tarjeta"><h3>Para los productores</h3><ul><li>Venta directa, sin tantos intermediarios</li><li>Ingresos más estables</li><li>Visibilidad para sus negocios</li></ul></article>
+      </div>
+    </section>
+
+    <!-- Testimonios -->
+    <section id="productores" class="seccion seccion-clara">
+      <h2>Historias de productores</h2>
+      <div class="grid grid-2">
+        <blockquote class="tarjeta"><p>Desde que vendemos en EcoMarket, llegamos a clientes de otras ciudades.</p><footer>María, Apiario La Montaña (Bucaramanga)</footer></blockquote>
+        <blockquote class="tarjeta"><p>Ahora cada cosecha tiene comprador seguro y un precio justo.</p><footer>Carlos, Huerta Viva (Tunja)</footer></blockquote>
+      </div>
+    </section>
+
+    <!-- Suscripción -->
+    <section id="suscripcion" class="seccion">
+      <h2>Recibe novedades y ofertas locales</h2>
+      <form id="form-suscripcion" class="form-suscripcion" novalidate>
+        <label for="nombre">Nombre</label>
+        <input id="nombre" name="nombre" type="text" autocomplete="name">
+        <label for="correo">Correo electrónico</label>
+        <input id="correo" name="correo" type="email" autocomplete="email">
+        <button class="btn btn-primary" type="submit">Suscribirme</button>
+        <p id="mensaje-form" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 EcoMarket · Colombia</p>
+    <ul class="nav-list">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="admin.html">Panel de administración</a></li>
+      <li><a href="https://instagram.com" rel="noopener">Instagram</a></li>
+      <li><a href="https://facebook.com" rel="noopener">Facebook</a></li>
+    </ul>
+  </footer>
+
+  <!-- Carrito de compras -->
+  <dialog id="carrito" class="carrito" aria-labelledby="carrito-titulo">
+    <h2 id="carrito-titulo">Tu carrito</h2>
+    <p id="carrito-vacio">Tu carrito está vacío. Agrega productos desde el catálogo.</p>
+    <ul id="lista-carrito" class="lista-carrito"></ul>
+    <p class="carrito-total">Total: <strong id="carrito-total">$0</strong></p>
+    <p id="aviso-carrito" role="status" aria-live="polite" class="mensaje-ok"></p>
+    <div class="carrito-botones">
+      <button id="btn-vaciar" class="btn btn-secundario" type="button">Vaciar carrito</button>
+      <button id="btn-cerrar-carrito" class="btn btn-secundario" type="button">Seguir comprando</button>
+      <button id="btn-comprar" class="btn btn-primary" type="button">Finalizar compra</button>
+    </div>
+  </dialog>
+
+  <script src="landing.js"></script>
+  <script src="tienda.js"></script>
+</body>
+</html>

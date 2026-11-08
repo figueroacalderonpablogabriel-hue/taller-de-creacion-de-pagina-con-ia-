@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel EcoMarket</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body class="panel">
+  <!-- Menú lateral -->
+  <aside id="sidebar" class="sidebar">
+    <a class="logo logo-claro" href="index.html">EcoMarket</a>
+    <nav aria-label="Menú del panel">
+      <ul>
+        <li><a href="#resumen">Resumen</a></li>
+        <li><a href="#productos">Productos</a></li>
+        <li><a href="#grafico">Gráfico</a></li>
+        <li><a href="index.html">Ver landing</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <div class="contenido">
+    <header class="topbar">
+      <button id="btn-menu" class="btn-menu" aria-controls="sidebar" aria-expanded="false" aria-label="Abrir menú">☰</button>
+      <div>
+        <h1>Panel de administración</h1>
+        <p>Bienvenido. Aquí controlas el catálogo y el inventario.</p>
+      </div>
+      <button id="btn-agregar" class="btn btn-accent">Agregar producto</button>
+    </header>
+
+    <main>
+      <!-- KPIs -->
+      <section id="resumen" class="kpis" aria-label="Indicadores">
+        <article class="tarjeta kpi"><span class="kpi-icono" aria-hidden="true">📦</span><h2>Productos registrados</h2><p id="kpi-total" class="kpi-valor">0</p><p>Productos activos en el catálogo</p></article>
+        <article class="tarjeta kpi"><span class="kpi-icono" aria-hidden="true">⚠️</span><h2>Inventario bajo</h2><p id="kpi-bajo" class="kpi-valor">0</p><p>Existencia igual o menor al stock mínimo</p></article>
+        <article class="tarjeta kpi"><span class="kpi-icono" aria-hidden="true">💰</span><h2>Valor del inventario</h2><p id="kpi-valor" class="kpi-valor">$0</p><p>Precio por cantidad disponible (COP)</p></article>
+      </section>
+
+      <!-- Filtros -->
+      <section id="productos" class="seccion-panel">
+        <h2>Productos</h2>
+        <div class="filtros">
+          <label>Buscar <input id="filtro-buscar" type="search" placeholder="Producto o productor"></label>
+          <label>Categoría <select id="filtro-categoria"><option value="">Todas</option></select></label>
+          <label>Ciudad <select id="filtro-ciudad"><option value="">Todas</option></select></label>
+          <label>Estado <select id="filtro-estado">
+            <option value="">Todos</option><option>Disponible</option><option>Stock bajo</option><option>Agotado</option></select></label>
+          <button id="btn-limpiar" class="btn btn-secundario" type="button">Limpiar filtros</button>
+          <button id="btn-vista" class="btn btn-secundario" type="button">Ver como tabla</button>
+        </div>
+
+        <p id="mensaje-vacio" class="mensaje-vacio" hidden>No hay productos que coincidan con los filtros.</p>
+        <div id="lista-tarjetas" class="grid grid-3"></div>
+        <div id="contenedor-tabla" class="tabla-scroll" hidden>
+          <table>
+            <thead><tr><th>Código</th><th>Producto</th><th>Categoría</th><th>Precio COP</th><th>Stock</th><th>Productor</th><th>Estado</th><th>Acciones</th></tr></thead>
+            <tbody id="cuerpo-tabla"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Gráfico -->
+      <section id="grafico" class="seccion-panel">
+        <h2>Productos por categoría</h2>
+        <div class="tarjeta"><canvas id="grafico-categorias" height="120"></canvas></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Modal para crear / editar -->
+  <dialog id="modal" class="modal" aria-labelledby="modal-titulo">
+    <form id="form-producto" novalidate>
+      <h2 id="modal-titulo">Agregar producto</h2>
+      <input type="hidden" id="campo-id">
+      <label>Nombre <input id="campo-nombre" type="text"></label>
+      <label>Categoría <select id="campo-categoria"></select></label>
+      <label>Precio (COP) <input id="campo-precio" type="number" min="1" step="1"></label>
+      <label>Stock <input id="campo-stock" type="number" min="0" step="1"></label>
+      <label>Stock mínimo <input id="campo-stockMinimo" type="number" min="0" step="1"></label>
+      <label>Productor <input id="campo-productor" type="text"></label>
+      <label>Ciudad <select id="campo-ciudad"></select></label>
+      <label>Fecha de registro <input id="campo-fechaRegistro" type="date"></label>
+      <label class="check"><input id="campo-organico" type="checkbox"> Orgánico</label>
+      <label class="check"><input id="campo-activo" type="checkbox" checked> Activo</label>
+      <p id="error-form" class="mensaje-error" role="alert"></p>
+      <div class="modal-botones">
+        <button type="button" id="btn-cancelar" class="btn btn-secundario">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Guardar producto</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="validacion.js"></script>
+  <script src="menu.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

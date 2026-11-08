@@ -1,0 +1,106 @@
+/* styles.css - estilos de la landing (y base compartida con el panel) */
+
+/* Variables: colores, tipografía, espacios y radios */
+:root {
+  --verde: #1f5c3f;
+  --verde-oscuro: #14402c;
+  --verde-claro: #e4f1e8;
+  --ambar: #e3a72f;
+  --tinta: #1c2a23;
+  --gris: #4f6057;
+  --fondo: #f6f9f6;
+  --blanco: #ffffff;
+  --borde: #d5e3d9;
+  --rojo: #b42318;
+  --fuente-titulo: Georgia, "Times New Roman", serif;
+  --fuente-texto: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --espacio: 1rem;
+  --radio: 10px;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; font-family: var(--fuente-texto); color: var(--tinta); background: var(--fondo); line-height: 1.6; font-size: 1rem; }
+h1, h2, h3 { font-family: var(--fuente-titulo); line-height: 1.2; }
+img { max-width: 100%; height: auto; border-radius: var(--radio); display: block; }
+a { color: var(--verde); }
+
+/* Foco visible para teclado */
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 3px solid var(--ambar); outline-offset: 2px;
+}
+
+/* Botones */
+.btn { display: inline-block; padding: .65rem 1.2rem; border-radius: var(--radio); border: 0; font: inherit; font-weight: 600; text-decoration: none; cursor: pointer; transition: background .2s; }
+.btn-primary { background: var(--verde); color: var(--blanco); }
+.btn-primary:hover { background: var(--verde-oscuro); }
+.btn-accent { background: var(--ambar); color: var(--tinta); }
+.btn-accent:hover { background: #f0b83f; }
+
+/* Encabezado (móvil primero: en columna) */
+.site-header { display: flex; flex-direction: column; align-items: center; gap: var(--espacio); padding: var(--espacio); background: var(--blanco); border-bottom: 1px solid var(--borde); }
+.logo { font-family: var(--fuente-titulo); font-size: 1.5rem; font-weight: 700; text-decoration: none; color: var(--verde); }
+.nav-list { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--espacio); list-style: none; margin: 0; padding: 0; }
+
+/* Hero */
+.hero { display: grid; gap: 2rem; padding: 2.5rem var(--espacio); max-width: 1100px; margin: 0 auto; align-items: center; }
+.hero h1 { font-size: 2rem; margin: 0 0 var(--espacio); }
+
+/* Secciones */
+.seccion { padding: 2.5rem var(--espacio); }
+.seccion > * { max-width: 1100px; margin-left: auto; margin-right: auto; }
+.seccion-clara { background: var(--verde-claro); }
+.grid { display: grid; gap: var(--espacio); grid-template-columns: 1fr; }
+.tarjeta { background: var(--blanco); border: 1px solid var(--borde); border-radius: var(--radio); padding: var(--espacio); margin: 0; }
+.tarjeta h3 { margin-top: 0; }
+blockquote footer { color: var(--gris); font-size: .9rem; }
+
+/* Formulario */
+.form-suscripcion { display: grid; gap: .5rem; max-width: 420px !important; }
+.form-suscripcion input { padding: .6rem; border: 1px solid var(--gris); border-radius: var(--radio); font: inherit; }
+.mensaje-error { color: var(--rojo); }
+.mensaje-ok { color: var(--verde); }
+
+/* Footer */
+.site-footer { background: var(--verde-oscuro); color: var(--blanco); text-align: center; padding: 1.5rem var(--espacio); }
+.site-footer a { color: var(--blanco); }
+
+/* Tablet y escritorio */
+@media (min-width: 700px) {
+  .site-header { flex-direction: row; justify-content: space-between; }
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .hero { grid-template-columns: 1fr 1fr; }
+  .hero h1 { font-size: 2.8rem; }
+}
+@media (min-width: 1000px) { .grid-4 { grid-template-columns: repeat(4, 1fr); } }
+
+/* El atributo hidden debe ganar sobre display:grid / flex */
+[hidden] { display: none !important; }
+
+/* ---------- Catálogo y carrito (tienda.js) ---------- */
+.btn-secundario { background: var(--blanco); color: var(--verde); border: 1px solid var(--verde); }
+.btn-secundario:hover { background: var(--verde-claro); }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+
+/* Botones para filtrar por categoría */
+.filtros-cat { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: var(--espacio) !important; }
+.filtros-cat .btn { padding: .4rem .9rem; }
+.filtros-cat .btn.activo { background: var(--verde); color: var(--blanco); }
+
+/* Tarjeta de producto */
+.producto-tienda p { margin: .2rem 0; color: var(--gris); }
+.producto-tienda .precio { font-size: 1.2rem; font-weight: 700; color: var(--tinta); }
+.producto-tienda .aviso-stock { color: var(--rojo); font-size: .9rem; }
+.producto-tienda .btn { margin-top: .6rem; width: 100%; }
+
+/* Ventana del carrito */
+.carrito { border: 0; border-radius: var(--radio); padding: 1.5rem; width: min(94vw, 520px); }
+.carrito::backdrop { background: rgba(0, 0, 0, .5); }
+.lista-carrito { list-style: none; margin: 0; padding: 0; }
+.lista-carrito li { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .5rem; padding: .6rem 0; border-bottom: 1px solid var(--borde); }
+.cantidad { display: flex; align-items: center; gap: .5rem; }
+.cantidad button { width: 32px; height: 32px; border: 1px solid var(--verde); background: var(--blanco); color: var(--verde); border-radius: var(--radio); font-size: 1.1rem; cursor: pointer; }
+.btn-quitar { background: none; border: 0; color: var(--rojo); cursor: pointer; font: inherit; text-decoration: underline; }
+.carrito-total { font-size: 1.2rem; text-align: right; }
+.carrito-botones { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: flex-end; }

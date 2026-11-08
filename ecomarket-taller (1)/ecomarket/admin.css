@@ -1,0 +1,70 @@
+/* admin.css - estilos del panel (usa las variables de styles.css) */
+
+.panel { display: block; }
+
+/* Sidebar: en móvil está oculto fuera de la pantalla */
+.sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: 240px; background: var(--verde-oscuro); padding: 1.5rem 1rem; transform: translateX(-100%); transition: transform .3s; z-index: 20; }
+.sidebar.abierto { transform: translateX(0); }
+.logo-claro { color: var(--blanco); display: block; margin-bottom: 1.5rem; }
+.sidebar ul { list-style: none; margin: 0; padding: 0; }
+.sidebar a:not(.logo) { display: block; padding: .6rem .8rem; color: var(--blanco); text-decoration: none; border-radius: var(--radio); }
+.sidebar a:not(.logo):hover { background: var(--verde); }
+
+.contenido { padding: var(--espacio); }
+.topbar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--espacio); justify-content: space-between; margin-bottom: var(--espacio); }
+.topbar h1 { margin: 0; font-size: 1.5rem; }
+.topbar p { margin: 0; color: var(--gris); }
+.btn-menu { font-size: 1.5rem; background: var(--verde); color: var(--blanco); border: 0; border-radius: var(--radio); width: 44px; height: 44px; cursor: pointer; }
+.btn-secundario { background: var(--blanco); color: var(--verde); border: 1px solid var(--verde); }
+
+/* KPIs */
+.kpis { display: grid; gap: var(--espacio); grid-template-columns: 1fr; margin-bottom: 2rem; }
+.kpi h2 { font-size: 1rem; margin: .3rem 0; }
+.kpi p { margin: 0; color: var(--gris); }
+.kpi .kpi-valor { font-size: 1.9rem; font-weight: 700; color: var(--verde); }
+.kpi-icono { font-size: 1.5rem; }
+
+/* Filtros */
+.seccion-panel { margin-bottom: 2rem; }
+.filtros { display: flex; flex-wrap: wrap; gap: var(--espacio); align-items: flex-end; margin-bottom: var(--espacio); }
+.filtros label { display: grid; gap: .2rem; font-size: .9rem; }
+.filtros input, .filtros select, .modal input:not([type=checkbox]), .modal select { padding: .5rem; border: 1px solid var(--gris); border-radius: var(--radio); font: inherit; }
+.mensaje-vacio { padding: 1.5rem; background: var(--verde-claro); border-radius: var(--radio); }
+
+/* Tarjetas de producto */
+.card-producto h3 { margin: .5rem 0 .3rem; font-size: 1.1rem; }
+.card-producto p { margin: .15rem 0; color: var(--gris); }
+.card-producto .precio { font-size: 1.2rem; font-weight: 700; color: var(--tinta); }
+.acciones { display: flex; gap: .5rem; margin-top: .8rem; }
+.acciones button { padding: .4rem .8rem; border-radius: var(--radio); border: 1px solid var(--verde); background: var(--blanco); color: var(--verde); cursor: pointer; font: inherit; }
+.acciones .eliminar { border-color: var(--rojo); color: var(--rojo); }
+
+/* Badges de estado */
+.badge { display: inline-block; padding: .15rem .6rem; border-radius: 999px; font-size: .8rem; font-weight: 600; }
+.badge-disponible { background: #d5f0dc; color: #14532d; }
+.badge-bajo { background: #fdf0b8; color: #6b4e00; }
+.badge-agotado { background: #fbd5d1; color: #8a1b12; }
+
+/* Tabla */
+.tabla-scroll { overflow-x: auto; background: var(--blanco); border: 1px solid var(--borde); border-radius: var(--radio); }
+table { width: 100%; border-collapse: collapse; min-width: 760px; }
+th, td { padding: .6rem .8rem; text-align: left; border-bottom: 1px solid var(--borde); }
+th { background: var(--verde-claro); }
+tbody tr:nth-child(even) { background: var(--fondo); }
+
+/* Modal */
+.modal { border: 0; border-radius: var(--radio); padding: 1.5rem; width: min(92vw, 480px); }
+.modal::backdrop { background: rgba(0, 0, 0, .5); }
+.modal form { display: grid; gap: .6rem; }
+.modal label { display: grid; gap: .2rem; font-size: .9rem; }
+.modal .check { display: flex; align-items: center; gap: .5rem; }
+.modal-botones { display: flex; justify-content: flex-end; gap: .5rem; }
+
+/* Escritorio: el sidebar queda fijo y visible */
+@media (min-width: 900px) {
+  .sidebar { transform: none; }
+  .contenido { margin-left: 240px; padding: 1.5rem 2rem; }
+  .btn-menu { display: none; }
+  .kpis { grid-template-columns: repeat(3, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) { .sidebar { transition: none; } }
